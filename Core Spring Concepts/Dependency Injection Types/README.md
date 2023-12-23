@@ -2,13 +2,13 @@
 
 ## Overview
 
-In this example, we explore the concepts of Constructor Dependency Injection (CDI) and Setter Dependency Injection (SDI) in the context of a Spring application. We have three classes: `Vehicle`, `ToyotaEngine`, `Tyres`, and a class `Engine`. The goal is to showcase how CDI and SDI work in the context of a Spring bean configuration.
+In this example, we explore the concepts of Constructor Dependency Injection (CDI) and Setter Dependency Injection (SDI) in the context of a Spring application. We have three classes: `Vehicle`, `ToyotaEngine`, `Tyres`, and an interface `Engine`. The goal is to showcase how CDI and SDI work in the context of a Spring bean configuration.
 
-## Classes
+## Classes and Interface
 
 ### 1. Vehicle
 
-The `Vehicle` class represents a generic vehicle and has a dependency on the `Engine` class, signifying the need for a standardized engine that adheres to Indian emission norms.
+The `Vehicle` class represents a generic vehicle and has a dependency on the `Engine` interface, signifying the need for a standardized engine that adheres to Indian emission norms.
 
 ```java
 public class Vehicle {
@@ -36,11 +36,11 @@ public class Vehicle {
 
 ### 2. ToyotaEngine
 
-The `ToyotaEngine` class extends the `Engine` class, providing a concrete implementation of an engine that complies with Indian emission norms.
+The `ToyotaEngine` class implements the `Engine` interface, providing a concrete implementation of an engine that complies with Indian emission norms.
 
 ```java
-public class ToyotaEngine extends Engine {
-    // Additional features specific to ToyotaEngine
+public class ToyotaEngine implements Engine {
+    // Implementation of Engine interface
 }
 ```
 
@@ -58,13 +58,13 @@ public class Tyres {
 }
 ```
 
-### 4. Engine
+### 4. Engine (Interface)
 
-The `Engine` class is a base class that represents the common features of an engine.
+The `Engine` interface defines the contract for an engine that the `Vehicle` class depends on.
 
 ```java
-public class Engine {
-    // Common features of an engine
+public interface Engine {
+    // Interface methods...
 }
 ```
 
@@ -121,4 +121,4 @@ In the bean configuration file (`springContext.xml`), we define the beans and th
 
 ## Conclusion
 
-This example demonstrates how to configure Spring beans using CDI and SDI. It emphasizes the use of a base class (`Engine`) and its extension (`ToyotaEngine`) for achieving flexibility and adherence to standards. The XML configuration file (`springContext.xml`) serves as a central place for defining dependencies and injecting them into the `Vehicle` class. This design promotes modularity and testability in the Spring application.
+This example demonstrates how to configure Spring beans using CDI and SDI. It emphasizes the use of interfaces (`Engine`) and concrete implementations (`ToyotaEngine`) for achieving flexibility and adherence to standards. The XML configuration file (`springContext.xml`) serves as a central place for defining dependencies and injecting them into the `Vehicle` class. This design promotes modularity and testability in the Spring application.
